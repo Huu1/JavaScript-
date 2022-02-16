@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function flatten_for(array) {
+            let result=[];
+            for (let i = 0; i < array.length; i++) {
+                const element = array[i];
+                if(Array.isArray(element)) {
+                    result = result.concat(flatten(element))
+                }else {
+                    result.push(element)
+                }
+            }
+            return result;
+        }
+
+        function flatten_reduce(array) {
+            return array.reduce((pre,cur)=>{
+                return  pre.concat(Array.isArray(cur) ? flatten_reduce(cur) : cur)
+            },[])
+        }
+
+        const test=[1,2,[3,4,5,[7,8]],[1,5]];
+        console.log(flatten_reduce(test));
+    </script>
+</body>
+</html>
